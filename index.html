@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cog &amp; Cadence · Bike repair, Budapest (concept project)</title>
+<meta name="description" content="Concept website for a neighbourhood bike workshop: build a repair tag, see the price and pickup day instantly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Courier+Prime:wght@400;700&family=Caveat:wght@600&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0eee8;--ink:#17191b;--mute:#5f625c;--line:#d8d5cb;--panel:#fbfaf6;--red:#c4372c;--kraft:#d8b676;--kraft-ink:#2b2114;--board:#1f2623;--chalk:#eef0e6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121413;--ink:#ecebe4;--mute:#a4a79d;--line:#2b2f2c;--panel:#1a1d1b;--board:#0c0f0e}}
+:root[data-theme="dark"]{--bg:#121413;--ink:#ecebe4;--mute:#a4a79d;--line:#2b2f2c;--panel:#1a1d1b;--board:#0c0f0e}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Figtree,system-ui,sans-serif}
+h1,h2,h3{font-family:"Familjen Grotesk",Figtree,sans-serif;margin:0;line-height:1.05;letter-spacing:-.02em}
+.w{max-width:1060px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font:700 21px "Familjen Grotesk",sans-serif;text-decoration:none}
+.logo i{color:var(--red);font-style:normal}
+.status{font-size:14px;display:flex;align-items:center;gap:8px;color:var(--mute)}
+.dot{width:10px;height:10px;border-radius:50%;background:#888}
+.dot.on{background:#2f9e57;box-shadow:0 0 0 4px rgba(47,158,87,.2)}
+.hero{display:grid;gap:30px;padding:44px 0 30px}
+@media(min-width:880px){.hero{grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;padding:70px 0 44px}}
+.kick{font:700 13px "Courier Prime",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+h1{font-size:clamp(44px,8.4vw,92px);font-weight:700}
+h1 em{font-style:normal;text-decoration:underline wavy var(--red);text-decoration-thickness:3px;text-underline-offset:8px}
+.lede{max-width:46ch;color:var(--mute);margin:22px 0 0;font-size:18px}
+.cta{display:inline-block;margin-top:24px;padding:14px 22px;background:var(--ink);color:var(--bg);border-radius:999px;text-decoration:none;font-weight:600}
+.bike{width:100%;height:auto;color:var(--ink)}
+section{padding:46px 0}
+h2{font-size:clamp(30px,5vw,48px);margin-bottom:10px}
+.sub{color:var(--mute);margin:0 0 28px;max-width:54ch}
+.build{display:grid;gap:30px;align-items:start}
+@media(min-width:880px){.build{grid-template-columns:1fr 1fr;gap:56px}}
+.tagwrap{position:relative;max-width:440px;margin:34px auto 0;width:100%}
+.string{position:absolute;left:50%;top:-44px;width:120px;height:70px;transform:translateX(-50%);z-index:2}
+.tag{position:relative;background:var(--kraft);color:var(--kraft-ink);border-radius:12px 12px 16px 16px;padding:46px 22px 22px;font-family:"Courier Prime",monospace;box-shadow:0 14px 30px rgba(0,0,0,.18),inset 0 0 0 2px rgba(0,0,0,.06);clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+.tag::before{content:"";position:absolute;top:14px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 3px rgba(0,0,0,.35)}
+.tag h3{font:700 22px "Courier Prime",monospace;letter-spacing:.04em;display:flex;justify-content:space-between;border-bottom:2px dashed rgba(43,33,20,.45);padding-bottom:8px;margin-bottom:6px}
+.nm{width:100%;margin:8px 0 10px;padding:8px 2px;border:0;border-bottom:2px solid rgba(43,33,20,.5);background:transparent;font:700 17px "Courier Prime",monospace;color:var(--kraft-ink)}
+.nm::placeholder{color:rgba(43,33,20,.5)}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dotted rgba(43,33,20,.35);cursor:pointer}
+.row input[type=checkbox]{appearance:none;width:22px;height:22px;border:2px solid var(--kraft-ink);border-radius:3px;display:grid;place-items:center;flex:none;background:transparent}
+.row input[type=checkbox]:checked::after{content:"✕";font-weight:700;line-height:1;color:var(--red)}
+.row b{flex:1;font-size:15px;line-height:1.25}
+.row small{display:block;font-weight:400;font-size:12.5px;opacity:.75}
+.row .pr{font-weight:700}
+.row select{font:700 14px "Courier Prime",monospace;background:transparent;border:1px solid var(--kraft-ink);color:var(--kraft-ink);border-radius:4px;padding:2px}
+.row.off{opacity:.4;cursor:not-allowed}
+.sum{display:flex;justify-content:space-between;align-items:end;margin-top:14px;gap:10px}
+.sum .big{font:700 40px "Courier Prime",monospace;line-height:1}
+.sum small{display:block;font-size:12.5px;opacity:.75}
+.ready{text-align:right;font-weight:700}
+.btns{display:flex;gap:10px;margin-top:16px}
+.btns button{flex:1;font:700 15px "Courier Prime",monospace;padding:13px 8px;border:2px solid var(--kraft-ink);border-radius:8px;cursor:pointer;background:transparent;color:var(--kraft-ink)}
+.btns button.p{background:var(--kraft-ink);color:var(--kraft)}
+.btns button:disabled{opacity:.35;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.stamp{position:absolute;right:16px;bottom:78px;border:4px solid var(--red);color:var(--red);font:700 30px "Courier Prime",monospace;padding:2px 12px;transform:rotate(-12deg) scale(1.3);opacity:0;pointer-events:none;transition:all .25s;border-radius:6px}
+.stamp.show{opacity:.9;transform:rotate(-12deg) scale(1)}
+.fine{font-size:12.5px;margin:12px 0 0;opacity:.8}
+.notes{display:grid;gap:22px}
+@media(min-width:760px){.notes{grid-template-columns:repeat(3,1fr)}}
+.note{background:var(--panel);border:1px solid var(--line);padding:22px 20px;border-radius:4px;font:600 25px/1.2 Caveat,cursive;transform:rotate(var(--r,0deg))}
+.note span{display:block;font:400 14px Figtree,sans-serif;color:var(--mute);margin-top:12px}
+.board{background:var(--board);color:var(--chalk);border-radius:14px;padding:26px 22px;border:8px solid #6a5a46}
+.board h2{color:var(--chalk)}
+table{width:100%;border-collapse:collapse;font-family:"Courier Prime",monospace}
+td,th{padding:10px 6px;border-bottom:1px dashed rgba(238,240,230,.3);text-align:left;font-size:15px}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+td:last-child,th:last-child{text-align:right}
+details{border-top:1px solid var(--line);padding:16px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{font:700 20px "Familjen Grotesk",sans-serif;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-size:26px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--mute);margin:10px 0 0;max-width:62ch}
+.hrs{display:grid;gap:30px}
+@media(min-width:760px){.hrs{grid-template-columns:1fr 1fr}}
+.hrs table td{font-family:Figtree,sans-serif;border-bottom:1px solid var(--line)}
+.hrs tr.today td{font-weight:700;color:var(--red)}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute);font-size:14px}
+@media print{body *{visibility:hidden}.tagwrap,.tagwrap *{visibility:visible}.tagwrap{position:absolute;left:0;top:30px;width:90mm}.btns,.fine,.string{display:none}}
+</style>
+</head>
+<body>
+<div class="w">
+<header>
+<a class="logo" href="#top">Cog <i>&amp;</i> Cadence</a>
+<div class="status"><span class="dot" id="dot"></span><span id="open">Checking hours…</span></div>
+</header>
+
+<main id="top">
+<div class="hero">
+<div>
+<div class="kick">Bike repair · Kazinczy utca 12</div>
+<h1>Bring it in <em>squeaky.</em> Take it home silent.</h1>
+<p class="lede">A small workshop with fixed prices and no jargon. Tell us what your bike needs, get your price and pickup day straight away, and print the tag to bring with you.</p>
+<a class="cta" href="#quote">Build your repair tag</a>
+</div>
+<svg class="bike" viewBox="0 0 420 270" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Line drawing of a bicycle">
+<circle cx="95" cy="178" r="68"/><circle cx="325" cy="178" r="68"/>
+<circle cx="95" cy="178" r="6" fill="currentColor"/><circle cx="325" cy="178" r="6" fill="currentColor"/>
+<path d="M95 178 L158 98 L262 98 L325 178 M158 98 L205 178 L262 98 M205 178 L95 178"/>
+<path d="M262 98 L248 58 M232 58 L270 58 M158 98 L150 74 M136 74 L168 74"/>
+<circle cx="205" cy="178" r="16"/><path d="M205 178 L190 206 M205 178 L222 150" stroke-width="6"/>
+<path d="M60 224 q30 -10 60 0" stroke="var(--red)" stroke-width="3" opacity=".7"/>
+<path d="M30 40 q-10 22 4 36 M390 60 l14 -10 M386 80 l18 0" stroke="var(--red)" stroke-width="3"/>
+</svg>
+</div>
+
+<section id="quote">
+<div class="build">
+<div>
+<h2>Your price, <br>before you walk in.</h2>
+<p class="sub">Tick what you need on the tag. Labour is a fixed price; parts are charged at what we pay, and we always ask before fitting anything extra. The pickup day skips Sundays.</p>
+<p class="sub" style="margin:0">Tip: most squeaks are a dry chain, not a broken bike. If you are unsure, pick the standard tune-up and we will tell you what we find.</p>
+</div>
+<div class="tagwrap">
+<svg class="string" viewBox="0 0 120 70" fill="none" stroke="#c4372c" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M60 62 C60 20 12 22 10 6 M60 62 C60 22 108 24 110 8"/></svg>
+<div class="tag" id="tag">
+<h3><span>REPAIR TAG</span><span id="no">No. 000</span></h3>
+<input class="nm" id="name" maxlength="24" placeholder="Name on the tag" aria-label="Name on the tag">
+<div id="list"></div>
+<div class="sum" aria-live="polite">
+<div><div class="big" id="sum">€0</div><small>labour, parts extra</small></div>
+<div class="ready" id="ready">Tick a service</div>
+</div>
+<div class="btns"><button id="print" disabled>Print tag</button><button class="p" id="book" disabled>Book drop-off</button></div>
+<div class="stamp" id="stamp">BOOKED</div>
+<p class="fine" id="fine">Demo only: nothing is sent to anyone.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Notes from the bench</h2>
+<p class="sub">Short advice from the mechanic, the kind people usually ask at the counter.</p>
+<div class="notes">
+<div class="note" style="--r:-1.2deg">Wash it with a bucket, not a jet. Water forced into the bearings is the slow killer.<span>Gábor, head mechanic</span></div>
+<div class="note" style="--r:.9deg">Check tyre pressure monthly. It fixes half the “my bike feels heavy” calls.<span>Gábor, head mechanic</span></div>
+<div class="note" style="--r:-.6deg">Lube the chain, wipe the extra off. Oil on the rim is a brake problem waiting.<span>Gábor, head mechanic</span></div>
+</div>
+</section>
+
+<section>
+<div class="board">
+<h2>The price board</h2>
+<table>
+<thead><tr><th>Job</th><th>Time</th><th>€</th></tr></thead>
+<tbody id="board"></tbody>
+</table>
+</div>
+</section>
+
+<section>
+<h2>Questions we get</h2>
+<details><summary>Do I need to book?</summary><p>No. Walk in during opening hours. Booking only saves you the wait, and the tag above is your booking in practice.</p></details>
+<details><summary>What if you find something extra?</summary><p>We message you a photo and a price. Nothing extra is fitted until you say yes.</p></details>
+<details><summary>Do you work on e-bikes?</summary><p>Yes for brakes, gears and wheels. We don’t open the motor or battery; for those we point you to the maker’s service centre.</p></details>
+<details><summary>How long is the guarantee?</summary><p>Six months on our workmanship. If the same fix fails, we redo it free.</p></details>
+</section>
+
+<section>
+<div class="hrs">
+<div><h2>Opening hours</h2><table id="hours"></table></div>
+<div><h2>Find us</h2><p class="sub">Kazinczy utca 12, Budapest<br>Courtyard entrance, second door on the left.<br>Bike racks right outside.</p></div>
+</div>
+</section>
+</main>
+
+<footer>Concept project: Cog &amp; Cadence is a fictional business, built as a portfolio sample.</footer>
+</div>
+
+<script>
+var S=[
+{id:'tune',n:'Standard tune-up',d:'Brakes, gears, bolts, pressure',p:45,t:1},
+{id:'brake',n:'Brake service',d:'Pads, cables, bleed if hydraulic',p:30,t:1},
+{id:'drive',n:'Drivetrain clean &amp; lube',d:'Chain, cassette, chainrings',p:25,t:1},
+{id:'gear',n:'Gear indexing',d:'Smooth, quiet shifting',p:20,t:1},
+{id:'wheel',n:'Wheel true',d:'Price per wheel',p:18,t:2,q:1},
+{id:'tube',n:'Tube or tyre swap',d:'Price per wheel',p:15,t:1,q:1},
+{id:'over',n:'Full overhaul',d:'Strip, clean, rebuild it all',p:140,t:3,x:1}];
+var H=[['Monday',8,18],['Tuesday',8,18],['Wednesday',8,18],['Thursday',8,18],['Friday',8,18],['Saturday',9,14],['Sunday',0,0]];
+var $=function(i){return document.getElementById(i)};
+var list=$('list'),sum=$('sum'),ready=$('ready'),book=$('book'),prt=$('print'),stamp=$('stamp');
+$('no').textContent='No. '+(Math.floor(Math.random()*900)+100);
+S.forEach(function(s){
+var l=document.createElement('label');l.className='row';l.dataset.id=s.id;
+l.innerHTML='<input type="checkbox" value="'+s.id+'"><b>'+s.n+'<small>'+s.d+'</small></b>'+(s.q?'<select aria-label="Wheels"><option>1</option><option>2</option></select>':'')+'<span class="pr">€'+s.p+'</span>';
+list.appendChild(l);
+$('board').insertAdjacentHTML('beforeend','<tr><td>'+s.n+'</td><td>'+s.t+' day'+(s.t>1?'s':'')+'</td><td>'+s.p+(s.q?' ea':'')+'</td></tr>');
+});
+function pickup(n){var d=new Date(),c=0;while(c<n){d.setDate(d.getDate()+1);if(d.getDay()!==0)c++}
+return d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})}
+function calc(){
+var over=list.querySelector('[value=over]').checked,tot=0,mx=0,n=0;
+list.querySelectorAll('.row').forEach(function(r){
+var b=r.querySelector('input'),s=S.filter(function(x){return x.id===b.value})[0],blocked=over&&!s.x;
+if(blocked)b.checked=false;b.disabled=blocked;r.classList.toggle('off',blocked);
+var sel=r.querySelector('select');if(sel)sel.disabled=!b.checked;
+if(b.checked){n++;tot+=s.p*(sel?+sel.value:1);mx=Math.max(mx,s.t)}
+});
+sum.textContent='€'+tot;ready.textContent=n?'Ready '+pickup(mx):'Tick a service';
+book.disabled=prt.disabled=!n;stamp.classList.remove('show');
+$('fine').textContent=over?'The overhaul already includes the other jobs.':'Demo only: nothing is sent to anyone.';
+}
+list.addEventListener('change',calc);
+book.addEventListener('click',function(){stamp.classList.add('show');$('fine').textContent='Pretend booked for '+ready.textContent.replace('Ready ','pickup on ')+'. Demo only.'});
+prt.addEventListener('click',function(){window.print()});
+function now(){
+var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Budapest',weekday:'long',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};
+p.forEach(function(x){o[x.type]=x.value});return {day:o.weekday,min:(+o.hour%24)*60+(+o.minute)}}
+function hours(){
+var t=now(),h=H.filter(function(x){return x[0]===t.day})[0],open=h&&h[2]&&t.min>=h[1]*60&&t.min<h[2]*60;
+$('dot').className='dot'+(open?' on':'');
+$('open').textContent=open?'Open now · closes '+h[2]+':00':'Closed now';
+var tb=$('hours');tb.innerHTML='';
+H.forEach(function(x){tb.insertAdjacentHTML('beforeend','<tr'+(x[0]===t.day?' class="today"':'')+'><td>'+x[0]+'</td><td>'+(x[2]?x[1]+':00–'+x[2]+':00':'Closed')+'</td></tr>')})}
+hours();calc();
+</script>
+</body>
+</html>
